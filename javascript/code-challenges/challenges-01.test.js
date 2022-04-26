@@ -124,6 +124,8 @@ const createList = (availableItems) => {
 /* ------------------------------------------------------------------------------------------------
 STRETCH - CHALLENGE 7
 
+Hexx went over this on 4/25 around 810pm during lecture. 
+
 Write a function named fizzbuzz that takes in an array of numbers.
 
 Iterate over the array using forEach to determine the output based on several rules:
