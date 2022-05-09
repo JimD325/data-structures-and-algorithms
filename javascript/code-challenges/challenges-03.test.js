@@ -53,9 +53,11 @@ Write a function named notInFirstArray that, given two arrays as input, uses fil
 
 For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 ------------------------------------------------------------------------------------------------ */
-
+// look up javascript Included. use includes and !==
+// you don't need to include the return because the return is implied??? one liner arrow functions imply that there is going to be a return.
+// can also remove the code block
 const notInFirstArray = (forbiddenValues, arr) => {
-  // Solution code here...
+  return arr.filter(element => !forbiddenValues.includes(element));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -98,7 +100,7 @@ const snorlaxData = {
 };
 
 const getBaseStatGreaterThan = (arr, minBaseStat) => {
-  // Solution code here...
+  return arr.filter(element =>element.baseStat>minBaseStat);
 };
 
 /* ------------------------------------------------------------------------------------------------
