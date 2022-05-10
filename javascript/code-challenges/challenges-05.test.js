@@ -136,12 +136,9 @@ Write a function named reversedString that takes in a string and returns a strin
 Note: You must use reduce for this challenge. You may not use the built-in .reverse() string method.
 ------------------------------------------------------------------------------------------------ */
 
-const reversedString = (str) => {
-  return str.split('').reduce((pv, cv) =>{
-    return cv+pv;
-  },'');
-};
-// In english: Use split to take the given string and break each character into an individual string and put it into a new array. From there, reduce the new array, and return the current value plus the pv to get the string reversed. If you did PV+CV, you would get the string in the original order.
+const reversedString = (str) => str.split('').reduce((pv, cv) => cv+pv, '');
+
+// In english: Use split to take the given string and break each character into an individual string and put it into a new array. the empty string inside of the split function tells computer to tell the computer to break every single character into an individual string. From there, reduce the new array, and return the current value plus the pv to get the string reversed. If you did PV+CV, you would get the string in the original order. calling one method after another is called method chaining.
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
 
