@@ -25,8 +25,11 @@ let starWarsPeople = [
 ];
 
 const sortStarWarsCharacters = (starWarsArr) => {
-  // Solution code here...
+  return starWarsArr.sort((a,b) => b.height-a.height);
 };
+
+// Returning the starwardsArray, sorting by height, comparing height of a to height of b. The goal is to go tallest to shortest, a first = ascending. 
+
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -35,9 +38,12 @@ Write a function named removeThree that takes an index and an array. The functio
 ------------------------------------------------------------------------------------------------ */
 
 const removeThree = (idx, arr) => {
-  // Solution code here...
+  arr.splice(idx,3);
+  return arr;
 };
 
+
+// seems to work fine now, but when I combined line 41 and 42 to just say return arr.splice(inx,3); the test failed. why cant you return on the same line?
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
 
@@ -45,7 +51,7 @@ Write a function named joinArray that takes an array and joins all of the elemen
 ------------------------------------------------------------------------------------------------ */
 
 const joinArray = (arr) => {
-  // Solution code here...
+  return arr.join(' ');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -63,7 +69,9 @@ For example, if the input is 'Welcome', the output will be:
 
 const howMuchPencil = (str) => {
   let result = [];
-  // Solution code here...
+  for (let i = 0; i < str.length+1; i++) {
+    result.push(str.slice(0 + i));
+  }
   return result;
 };
 
