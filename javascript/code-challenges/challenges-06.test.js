@@ -89,7 +89,7 @@ console.log(people[1].isAuthor) prints true
 const setStatusAsAuthor = (people) => {
   people.forEach(person => person.isAuthor = true);
 };
-
+// this is a good use for each, since it only edits the objects in the array and doesnt return a whole bunch more data, and therefore take up a bunch more memory.
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6 - Stretch Goal
 
@@ -106,9 +106,10 @@ console.log(a) prints [1, 2, 3, 4]
 ------------------------------------------------------------------------------------------------ */
 
 const append = (arr1, arr2) => {
-  for(let i=0; i <arr2.length; i++){
-    arr1.push(arr2[i]);
-  }
+  // for(let i=0; i <arr2.length; i++){
+  //   arr1.push(arr2[i]);
+  // }
+  arr1.push(...arr2);
 
 };
 
