@@ -70,10 +70,12 @@ For example, if the input is 'Welcome', the output will be:
 const howMuchPencil = (str) => {
   let result = [];
   for (let i = 0; i < str.length+1; i++) {
-    result.push(str.slice(0 + i));
+    result.push(str.slice(i));
   }
   return result;
 };
+
+// You want the final index of the array to have a value of an empty string, so you have to add +1 in the str.length to return a totally empty string.
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -131,7 +133,11 @@ const gruffaloCrumble = {
 
 const listFoods = (recipe) => {
   let result = [];
-  // Solution code here...
+  recipe.ingredients.forEach(value => {
+    let noNumbers =value.slice(value.indexOf(' ') +1);
+    result.push(noNumbers.slice(noNumbers.indexOf(' ') +1));
+
+  });
   return result;
 };
 
@@ -179,9 +185,13 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const removeEvenValues = (arr) => {
-  // Solution code here...
+  for (let i = arr.length; i >= 0; i--){
+    if (arr[i] % 2===0){
+      arr.splice(i,1);
+    }
+  }
 };
-
+// have to decrement here if you want to use arr.length, because as you splice on the for loop, the length of the array shortens.
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
 
@@ -309,7 +319,7 @@ xdescribe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   test('It should remove the even numbers from the array', () => {
     let list = [1, 2, 3, 4, 5, 6];
     removeEvenValues(list);
