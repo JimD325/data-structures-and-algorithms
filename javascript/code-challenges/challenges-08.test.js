@@ -53,20 +53,32 @@ let characters = [
 ];
 
 const sortByChildren = (charArray) => {
-  return charArray.sort((a,b) => a.children.length - b.children.length).sort(c,d);
-
+  let arr = charArray.sort((a,b) =>{
+    if (a.children.length < b.children.length){
+      return -1;
+    }
+    // returning -1 will put in ascending order ie least to most.
+    if (a.children.length === b.children.length && a.house <b.house){
+      return -1;
+    }
+    // if the lengths are equal, we sort by house name. returning -1 will put in alphabetical order.
+  }
+  );
+  return arr;
 };
-
+// first sort by length, then sort by 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
-Write a function named containsW that takes in a string. This function should use a regular expression pattern to return true if the string contains the letter 'w' in lower case or false if it does not. 
+Write a function named containsW that takes in a string. This function should use a regular expression pattern to return true if the string contains the letter 'w' in lower case or false if it does not.
 
 ------------------------------------------------------------------------------------------------ */
 
 const containsW = (str) => {
-  // Solution code here...
+  return /[w]/.test(str);
 };
+
+// /[]/ : the // on either side of the [] indicate we are going into regex domain. [w] tells regex to search for a w anywhere in the string. no to be confused with \w, which would search for any letter or number in the string.
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -81,9 +93,9 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const isNum = (input) => {
-  // Solution code here...
+  return /\d/.test(input);
 };
-
+// \d checks for any numbers in what we searched for, test is run on input and returns true if a number is found.
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
 
@@ -92,9 +104,9 @@ Write a function named containsWorld that takes in a string or number of any len
 ------------------------------------------------------------------------------------------------ */
 
 const containsWorld = (input) => {
-  // Solution code here...
+  return /\bworld/.test(input);
 };
-
+// \b looks for the word boundary, and the word we are looking for in the string is world.
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
@@ -104,8 +116,12 @@ Return an array containing all the matches.
 ------------------------------------------------------------------------------------------------ */
 
 const isCapitalized = (str) => {
-  // Solution code here...
+  const cap = /\b[A-Z][a-z]*/g;
+  let words = str.match(cap);
+  return words || [];
 };
+
+// Barney Style, from left to right. / brings us into regex domain. \b tells us to look at the word boundary. [A-Z] searches for all words with a capitalized first letter, and the [a-z]* indicates that the capitalized words which are found and should be followed by zero or more lowercase characters. the * specifies to match zero or more occurances of the character set. 
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
