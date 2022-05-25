@@ -121,7 +121,7 @@ const isCapitalized = (str) => {
   return words || [];
 };
 
-// Barney Style, from left to right. / brings us into regex domain. \b tells us to look at the word boundary. [A-Z] searches for all words with a capitalized first letter, and the [a-z]* indicates that the capitalized words which are found and should be followed by zero or more lowercase characters. the * specifies to match zero or more occurances of the character set. 
+// Barney Style, from left to right. / brings us into regex domain. \b tells us to look at the word boundary. [A-Z] searches for all words with a capitalized first letter, and the [a-z]* indicates that the capitalized words which are found and should be followed by zero or more lowercase characters. the * specifies to match zero or more occurances of the character set.
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -130,9 +130,11 @@ Write a function named citiesAtoJ that takes in an array of city names and uses 
 ------------------------------------------------------------------------------------------------ */
 
 const citiesAtoJ = (arr) => {
-  // Solution code here...
-};
+  const pattern = /^[A-J]/gm;
+  return arr.filter(value => value.match(pattern));
 
+};
+// match checks only first letter in string, does it match the pattern? then save in filter, if null filter removes it. Data organization is different in an array than in just a long string. keep that in mind when using regex. ^
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
 
