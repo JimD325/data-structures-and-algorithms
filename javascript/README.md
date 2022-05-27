@@ -83,3 +83,13 @@ From the `data-structures-and-algorithms/javascript` folder, execute the followi
 #### Live Tests
 
 Note that when you check your code into GitHub, all of your tests will automatically execute. These results should match your own, and will be found on the  **Actions** tab
+
+Name of feature: Adding modules/components 
+
+Estimate of time needed to complete: 2hrs
+
+Start time: 647PM
+
+Finish time: _____
+
+Actual time needed to complete: _____
