@@ -11,7 +11,7 @@ function returnTen(str) {
   return str.split('').splice(str.length - 10, 10);
 }
 
-/* ------------------------------------------------------------------------------------------------
+/* splice returns what we are removing, ye olde method chaining. ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
 Write a function named findMax that takes in a matrix of positive numbers and returns the number with the highest value.
@@ -82,7 +82,7 @@ const alkiBeach = [33, 31, 147, 130, 27, 93, 38, 126, 141, 63, 46, 17];
 
 const cookieStores = [firstPike, seaTac, seattleCenter, capHill, alkiBeach];
 const grandTotal = (stores) => {
-  let arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  let arr = [0,0,0,0,0,0,0,0,0,0,0,0];
 
   for (let i = 0; i < stores.length; i++) {
     for (let j = 0; j < stores[i].length; j++) {
