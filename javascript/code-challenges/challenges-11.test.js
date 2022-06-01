@@ -21,7 +21,7 @@ Becomes:
 function transformToLis(obj) {
   return Object.entries(obj).map(value => `<li>${value[0]}: ${value[1]}</li>`);
 }
-
+// would have to use reactDOM to make an actual HTML item.
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
@@ -63,13 +63,16 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 ------------------------------------------------------------------------------------------------ */
 
 const divisibleByFiveTwoToThePower = (input) => {
-  return input.map(array =>
-    array.filter(num =>
-      typeof (num) === 'number')).map(array =>
-    array.filter(num =>
-      num % 5 === 0)).map(array =>
-    array.map(number =>
-      Math.pow(2, number)));
+  return input.map(array => {
+    return array.filter(element => typeof element ==='number' && element % 5 ===0).map(num => Math.pow(2,num));
+  });
+  // return input.map(array =>
+  //   array.filter(num =>
+  //     typeof (num) === 'number')).map(array =>
+  //   array.filter(num =>
+  //     num % 5 === 0)).map(array =>
+  //   array.map(number =>
+  //     Math.pow(2, number)));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -135,13 +138,15 @@ let starWarsData = [{
 }];
 
 let findMaleAndFemale = (data) => {
-  // cannot do the data.gender == 'male' ||'female' ? `${object... below. It is a constant condition, what does that mean? can you use logical OR as the initial question in a ternary?
+  return data.filter(character => character.gender === 'male' || character.gender ==='female').map(character=> character.name).join(' and ');
+
+  // cannot do the data.gender == 'male' || data.gender =='female' ? `${object... below. It is a constant condition, what does that mean? can you use logical OR as the initial question in a ternary?
   // return data.map(object=> data.gender == 'male' ||'female' ? `${object.name} and `:'').toString().slice(0,String.length-6).replace(/,/g,'');
-  return (data.map(object =>
-    object.gender === 'male' ? `${object.name} and ` :
-      object.gender === 'female' ? `${object.name} and `
-        : '')
-  ).toString().replace(/,/g, '').slice(0, String.length - 6);
+  // return (data.map(object =>
+  //   object.gender === 'male' ? `${object.name} and ` :
+  //     object.gender === 'female' ? `${object.name} and `
+  //       : '')
+  // ).toString().replace(/,/g, '').slice(0, String.length - 6);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -151,14 +156,16 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 ------------------------------------------------------------------------------------------------ */
 
 let findShortest = (data) => {
-  let a = data.map(object =>
-    object.height).map(num =>
-    Number(num)).reduce((pv, cv) =>
-    Math.min(pv, cv)).toString();
-  // use a to determine the minimum height
-  return data.map(object =>
-    object.height === a ? `${object.name}` : '').filter(word =>
-    word.length > 1).toString();
+  return data.reduce((shortestsofar, nextchar)=> Number(shortestsofar.height) < Number(nextchar.height) ? shortestsofar : nextchar).name;
+
+  // let a = data.map(object =>
+  //   object.height).map(num =>
+  //   Number(num)).reduce((pv, cv) =>
+  //   Math.min(pv, cv)).toString();
+  // // use a to determine the minimum height of characters, returns 96 in this case.
+  // return data.map(object =>
+  //   object.height === a ? `${object.name}` : '').filter(word =>
+  //   word.length > 1).toString();
 };
 
 /* ------------------------------------------------------------------------------------------------
