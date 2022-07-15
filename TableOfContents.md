@@ -1,3 +1,4 @@
 # Table of Contents
 
-[Array-Reverse Whiteboard](./401Challenges/README.md)
+1. [Array-Reverse Whiteboard](./401Challenges/array-reverse/README.md)
+2. [Array-Reverse Whiteboard](./401Challenges/array-insert-shift/README.md)
