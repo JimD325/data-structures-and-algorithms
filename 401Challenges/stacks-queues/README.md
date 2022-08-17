@@ -18,7 +18,8 @@ Queues encode traversal and structure together.
 ## Challenge
 The challenge was to implement methods in the stack and queue. These methods were push, pop, enqueue, dequeue, peek, and size. 
 
-## Approach & Efficiency
+## Whiteboard
+![](CC%2011.PNG)
 
 
 ## API
