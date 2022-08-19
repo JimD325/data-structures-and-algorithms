@@ -50,7 +50,7 @@ export class SetOfStacks<T> {
     }
   }
   
-  class Stack<T> {
+  export class Stack<T> {
     readonly _arr: T[] = [];
   
     constructor(private readonly maxHeight: number) {}
