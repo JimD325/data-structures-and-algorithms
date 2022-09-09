@@ -30,7 +30,6 @@ class BinarySearchTree extends BinaryTree {
     }
     contains(number: number) {
         let counter = this.root;
-        console.log(counter);
         if(counter === undefined) return false;
         while(true){
             if(counter?.value===number) return true;

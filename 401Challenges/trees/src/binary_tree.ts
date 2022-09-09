@@ -35,7 +35,7 @@ class Node {
     }
     // left right root
     postOrder() {
-        let traversal: any[] = [];
+        let traversal: any[] | undefined = [];
         if (this.left) {
             let leftTraversal = this.left.postOrder();
             traversal = traversal.concat(leftTraversal);
@@ -65,54 +65,52 @@ class Node {
         traversal.push(this.value);
         return Math.max(...traversal);
     }
-    // input is root node of a tree, output a single number. 
-    // better max should not have to iterate through the array a second time. 
-    // betterMax(){
-    //     let traversal: any[] = [];
-    //     let counter: number = this.value;
-    //     if (this.left) {
-    //         let leftTraversal = this.left.postOrder();
-    //         traversal = traversal.concat(leftTraversal);
-    //         if(this.value>counter){
-    //             counter = this.value;
-    //         }
-    //     }
+}
 
-    //     if (this.right) {
-    //         let rightTraversal = this.right.postOrder();
-    //         traversal = traversal.concat(rightTraversal);
-    //         if(this.value>counter){
-    //             counter=this.value;
-    //         }
-    //     }
-    //     traversal.push(this.value);
-    //     return Math.max(...traversal);
-    // }
+const breadthFirst = (tree: BinaryTree): number[] | undefined => {
+    let Q: Node[] = [];
+    let arr: number[] = [];
+    if(!tree.root){
+        return undefined;
+    }
+    Q.push(tree.root);
+    while(Q.length>0){
+        let front: any = Q.shift();
+        arr.push(front.value);
+
+        if(front.left){
+            Q.push(front.left);
+        }
+        if(front.right){
+            Q.push(front.right);
+        }
+    }
+    return arr;
 }
 
 
 class BinaryTree {
     // typing in public gives us access to this.root notation
-    constructor(public root: Node) {
+    constructor(public root: Node | undefined) {
         this.root = root;
     }
 
     preOrder() {
-        return this.root.preOrder();
+        return this.root?.preOrder();
         // return preOrder(this.root);
     }
     inOrder() {
-        return this.root.inOrder();
+        return this.root?.inOrder();
     }
 
     postOrder() { 
-        return this.root.postOrder();
+        return this.root?.postOrder();
     }
     max(){
-        return this.root.max();
+        return this.root?.max();
     }
 }
 
-module.exports = { Node, BinaryTree };
+module.exports = { Node, BinaryTree, breadthFirst };
 // below tricks Typescript into not being mad about node being in the modules. 
 export {};

@@ -1,4 +1,4 @@
-const { BinaryTree, Node } = require("./binary_tree.ts");
+const { BinaryTree, Node, breadthFirst } = require("./binary_tree.ts");
 
 describe("Binary Tree", () => {
   const tree = new BinaryTree(
@@ -30,6 +30,9 @@ describe("Binary Tree", () => {
 
   it("returns the maximum value stored in the tree", ()=>{
     expect(tree.max()).toEqual(11);
+  })
+  it("returns a list of all values in the tree, left to right, gen 0 to gen n", ()=>{
+    expect(breadthFirst(tree)).toEqual([1,7,9,2,6,9,3,11,5]);
   })
 });
 export {};
