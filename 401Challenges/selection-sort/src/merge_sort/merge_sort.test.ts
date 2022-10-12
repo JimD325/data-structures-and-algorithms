@@ -1,6 +1,6 @@
 const {mergeSort} = require('./merge_sort.ts')
 
-describe("mergeSort", ()=>{
+xdescribe("mergeSort", ()=>{
   const A = [8,4,23,42,16,15];
   const B = [];
   const C = [1];
