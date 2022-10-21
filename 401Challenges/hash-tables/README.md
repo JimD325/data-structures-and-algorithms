@@ -1,7 +1,9 @@
-# Hashtables
-<!-- Short summary or background information -->
+## Challenge 31
+- Write a function called repeated word that finds the first word to occur more than once in a string
 
-## Challenge
+![](CC31.PNG)
+
+## Challenge 30
 - Implment a hashtable Class with the following methods:
 1. Set(key, value) => void
     - should hash the key, set the key/val pair in the table, handling collisions as needed.
@@ -20,8 +22,3 @@
 6. Successfully retrieve a value from a bucket within the hashtable that has a collision
 7. Successfully hash a key to an in-range value
 
-## Approach & Efficiency
-<!-- What approach did you take? Why? What is the Big O space/time for this approach? -->
-
-## API
-<!-- Description of each method publicly available in each of your hashtable -->

@@ -71,6 +71,7 @@ export class HashTable<V> {
 
 
   set(key: string, value: any): void {
+
     let index:number = this.hash(key);
 
     let val = this.data[index]
@@ -91,7 +92,6 @@ export class HashTable<V> {
     }
   }
 
-
 /**
  * 
  * Accepts a key as an arguement and returns and returns boolean indiciating if it is already in the table
@@ -99,7 +99,6 @@ export class HashTable<V> {
 
   has(key: string): boolean {
       let index = this.hash(key);
-      console.log("index on has---->", this.data);
       if(!this.data[index]){
         return false;
       }
@@ -138,4 +137,5 @@ export class HashTable<V> {
       const sum = key.split("").map(char => char.charCodeAt(0)).reduce((a,b)=> a+b);
     return sum%this.capacity;
   }
+
 }
