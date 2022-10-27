@@ -9,7 +9,6 @@ export class Node<V> {
     this.value = value; 
   }
 }
-
 export class LinkedList<K,V> {
   node: Node<V> | undefined
 
@@ -35,7 +34,6 @@ export class LinkedList<K,V> {
   //   }
   // }
 }
-
 
  
 export class HashTable<V> {
@@ -63,12 +61,8 @@ export class HashTable<V> {
       tracker = tracker.next;
     }
     throw new Error()
-    
-
-
 
   }
-
 
   set(key: string, value: any): void {
 
@@ -139,3 +133,4 @@ export class HashTable<V> {
   }
 
 }
+
