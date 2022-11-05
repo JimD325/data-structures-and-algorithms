@@ -1,0 +1,23 @@
+{
+  "name": "leftjoin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JimD325/data-structures-and-algorithms.git"
+  },
+  "author": "Jim Doyle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JimD325/data-structures-and-algorithms/issues"
+  },
+  "homepage": "https://github.com/JimD325/data-structures-and-algorithms#readme",
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.18.6",
+    "typescript": "^4.8.4"
+  }
+}
