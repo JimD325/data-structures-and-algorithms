@@ -5,7 +5,7 @@
 ![](./MazeCC38.PNG)
 
 ## Business Trip Calculation
-- Createa function which will calculate the total cost of a business trip itenerary, as well as determine if the trip is even possible with direct flights. 
+- Create a function which will calculate the total cost of a business trip itenerary, as well as determine if the trip is even possible with direct flights. 
 
 ### Whiteboard ![](./businessTrip%20CC.PNG)
 
