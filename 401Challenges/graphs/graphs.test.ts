@@ -1,181 +1,87 @@
-import {Node, Graph, Edge, breadthFirst } from "./graphs"
+import { Graph, breadthFirst, businessTrip, canSolve } from "./graphs";
 
-import {Maze} from './mazeCC'
-// import can_solve, {noLockMaze} from './mazeCC'
+describe("graph", () => {
+  const graph = new Graph();
+  const b = graph.addNode("b");
+  const c = graph.addNode("c");
+  it("adds a node to a graph", () => {
+    expect(graph.addNode("a")).toEqual({ value: "a", edges: new Map() });
+  });
+  it("adds an edge to a node", () => {
+    graph.addEdge(b, c, true);
+    expect(b.edges.get(c)).toBe(true);
+  });
+  it("gets all of the nodes in the graph", () => {
+    expect(graph.getNodes().size).toBe(3);
+  });
+  it("gets all of the neighbors of a node", () => {
+    expect(graph.neighbors(b).size).toEqual(1);
+  });
+  it("gets the size of the graph", () => {
+    const d = graph.addNode("d");
+    const e = graph.addNode("e");
+    const f = graph.addNode("f");
+    graph.addEdge(d, f, true);
+    graph.addEdge(e, f, true);
+    graph.addEdge(e, b, true);
+    graph.addEdge(e, c, true);
+    expect(graph.size()).toEqual(6);
+  });
+  xit("Can conduct a breadth First Search", () => {
+    expect(breadthFirst(graph, b)).toEqual(["b", "e", "c", "f", "d"]);
+  });
+  it("Can get the cost of a business trip", () => {
+    //nodes
+    const busGraph = new Graph();
+    const metroville = busGraph.addNode("metroville");
+    const pandora = busGraph.addNode("pandora");
+    const arendelle = busGraph.addNode("arendelle");
+    const monst = busGraph.addNode("monstropolis");
+    const narnia = busGraph.addNode("narnia");
+    const naboo = busGraph.addNode("naboo");
+    // edges
+    busGraph.addEdge(pandora, arendelle, 150);
+    busGraph.addEdge(pandora, metroville, 82);
+    busGraph.addEdge(arendelle, metroville, 99);
+    busGraph.addEdge(arendelle, monst, 42);
+    busGraph.addEdge(metroville, monst, 105);
+    busGraph.addEdge(metroville, narnia, 37);
+    busGraph.addEdge(metroville, naboo, 26);
+    busGraph.addEdge(monst, naboo, 73);
+    busGraph.addEdge(naboo, narnia, 250);
 
-import {can_solve} from './mazeCC'
-// const can_solve = require('./mazeCC')
-interface Airport {
-  code: string;
-}
-interface Route {
-  time: number;
-}
+    const nodes1 = [metroville, pandora];
+    const nodes2 = [arendelle, monst, naboo];
+    // @ts-ignore
+    expect(businessTrip(nodes1)).toEqual(82);
+    // @ts-ignore
+    expect(businessTrip(nodes2)).toEqual(115);
+  });
 
+  it("can solve a maze", () => {
+    const maze = new Graph();
+    const start = maze.addNode("start");
+    const keyRoom = maze.addNode("key");
+    const treasure = maze.addNode("treasure");
+    const empty = maze.addNode("");
 
+    maze.addEdge(start, keyRoom, false);
+    maze.addEdge(start, empty, false);
+    maze.addEdge(empty, treasure, true);
 
-let graph = new Graph<Airport, Route>();
-  let sea:Node<Airport, Route>;
-  let ord:Node<Airport, Route>;
-  let nyc:Node<Airport, Route>;
-  let mia:Node<Airport, Route>;
+    const maze2 = new Graph();
+    const start2 = maze.addNode("start");
+    const keyRoom2 = maze.addNode("key");
+    const treasure2 = maze.addNode("treasure");
+    const empty2 = maze.addNode("");
 
+    maze2.addEdge(start2, empty2, false);
+    maze2.addEdge(start2, keyRoom2, true);
+    maze2.addEdge(keyRoom2, treasure, false);
 
-
-
-
-
-
-xdescribe("graph", () => {
- it("can add to the graph and can return the added node", () => {
-    ord = graph.addNode({ code: "ORD"});
-    expect(ord).toEqual({
-      value: { code: "ORD"},
-      edges: []
-    })
-    sea = graph.addNode({ code: "SEA"});
-    expect(sea).toEqual({
-      value: { code: "SEA"},
-      edges: []
-    })
-    expect(graph.nodes).toEqual(
-      [
-       {
-        value: { code: "ORD"},
-        edges: []
-      } ,
-      {
-        value: { code: "SEA"},
-        edges: []
-      }
-      ]
-      
-    )
- })
- it("can add edges", () => {
-  graph.addEdge(sea, ord, { time: 1000 });
-    graph.addEdge(sea, ord, { time: 1200 });
-    graph.addEdge(ord, sea, { time: 1100 });
-    expect(sea.edges).toHaveLength(3);
-    
-})
-it("can get all nodes", () => {
-  let nodes = graph.getNodes();
-  expect(nodes).toContain(ord);
-  expect(nodes).toContain(sea);
-})
-it("can get neighbors", () => {
-  console.log("graph.neighbors(sea)",graph.neighbors(sea))
-  expect(graph.neighbors(sea)).toContain(ord)
-})
-it("get number of nodes in graph", () => {
-  
-  expect(graph.size()).toEqual(2)
-})
-
-it('can conduct a breadth first traversal', () => {
-    nyc = graph.addNode({code: "NYC"});
-    mia = graph.addNode({code: "MIA"});
-    graph.addEdge(ord, mia, {time:2000});
-    graph.addEdge(mia, nyc, {time: 1400});
-    graph.addEdge(nyc, ord, {time:900})
-    expect(breadthFirst(graph,sea)).toEqual([sea.value, ord.value, mia.value, nyc.value])
-})
-})
-
-
-let noLockMaze = new Maze ();
-let locklessStart = noLockMaze.addNode({
-  hasGold: false,
-  hasKey: false,
-  roomNumber: 1
-})
-let locklessTwo = noLockMaze.addNode({
-  hasGold: false,
-  hasKey: false,
-  roomNumber: 2
-})
-let locklessThree = noLockMaze.addNode({
-  hasGold: true,
-  hasKey: false,
-  roomNumber: 3
-})
-let locklessFour = noLockMaze.addNode({
-  hasGold: false,
-  hasKey: false,
-  roomNumber: 4
-})
-noLockMaze.createStart(locklessStart)
-noLockMaze.addBiEdge(locklessStart,locklessTwo, {isLocked: false})
-noLockMaze.addBiEdge(locklessStart,locklessFour,{isLocked: false})
-noLockMaze.addBiEdge(locklessTwo,locklessThree,{isLocked: false})
-
-let trueLockMaze = new Maze ();
-let trueLockStart = noLockMaze.addNode({
-  hasGold: false,
-  hasKey: false,
-  roomNumber: 1
-})
-let trueLockTwo = noLockMaze.addNode({
-  hasGold: false,
-  hasKey: false,
-  roomNumber: 2
-})
-let trueLockThree = noLockMaze.addNode({
-  hasGold: true,
-  hasKey: false,
-  roomNumber: 3
-})
-let trueLockFour = noLockMaze.addNode({
-  hasGold: false,
-  hasKey: true,
-  roomNumber: 4
-})
-trueLockMaze.createStart(trueLockStart)
-trueLockMaze.addBiEdge(trueLockStart,trueLockTwo, {isLocked: false})
-trueLockMaze.addBiEdge(trueLockStart,trueLockFour,{isLocked: false})
-trueLockMaze.addBiEdge(trueLockTwo,trueLockThree,{isLocked: true})
-
-
-let falseLockMaze = new Maze ();
-let falseLockStart = noLockMaze.addNode({
-  hasGold: false,
-  hasKey: false,
-  roomNumber: 1
-})
-let falseLockTwo = noLockMaze.addNode({
-  hasGold: false,
-  hasKey: true,
-  roomNumber: 2
-})
-let falseLockThree = noLockMaze.addNode({
-  hasGold: true,
-  hasKey: false,
-  roomNumber: 3
-})
-let falseLockFour = noLockMaze.addNode({
-  hasGold: false,
-  hasKey: false,
-  roomNumber: 4
-})
-falseLockMaze.createStart(falseLockStart)
-falseLockMaze.addBiEdge(falseLockStart,falseLockTwo, {isLocked: true})
-falseLockMaze.addBiEdge(falseLockStart,falseLockFour,{isLocked: false})
-falseLockMaze.addBiEdge(falseLockTwo,falseLockThree,{isLocked: false})
-
-describe("can_solve", () => {
-  it ("will return true with no locked doors", () => {
-    console.log("no lock maze in text", noLockMaze);
-    expect(can_solve(noLockMaze)).toBe(true);
-  })
-  
-  it ("will return true with locked doors, but solveable", () => {
-    expect(can_solve(trueLockMaze)).toBe(true);
-  })
-  
-  it ("will return false when not solveable", () => {
-    expect(can_solve(falseLockMaze)).toBe(false);
-  })
-})
-
-
+    //@ts-ignore
+    expect(canSolve(start)).toBe(true);
+    //@ts-ignore
+    expect(canSolve(start2)).toBe(false);
+  });
+});

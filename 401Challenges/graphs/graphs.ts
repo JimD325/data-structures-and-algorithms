@@ -1,15 +1,42 @@
-export interface Node<NV, EV> {
-  [x: string]: any;
+interface Node<NV, EV> {
   value: NV;
-  edges: Edge<NV, EV>[];
+  edges: Map<Node<NV, EV>, EV>;
 }
 
-export interface Edge<NV, EV> {
-  value: EV;
-  nodes: [Node<NV, EV>, Node<NV, EV>];
+export class Graph<NV, EV> {
+  private nodes = new Set<Node<NV, EV>>();
+
+  addNode(value: NV): Node<NV, EV> {
+    const node: Node<NV, EV> = {
+      value,
+      edges: new Map(),
+    };
+    this.nodes.add(node);
+    return node;
+  }
+
+  addEdge(a: Node<NV, EV>, b: Node<NV, EV>, value: EV): void {
+    a.edges.set(b, value);
+    b.edges.set(a, value);
+  }
+
+  getNodes(): Set<Node<NV, EV>> {
+    return this.nodes;
+  }
+
+  neighbors(node: Node<NV, EV>): Set<Node<NV, EV>> {
+    return new Set(node.edges.keys());
+  }
+
+  size(): number {
+    return this.nodes.size;
+  }
 }
 
-export const breadthFirst = <NV, EV>(graph: Graph<NV, EV>, start: Node<NV, EV>): NV[] => {
+export const breadthFirst = <NV, EV>(
+  graph: Graph<NV, EV>,
+  start: Node<NV, EV>
+): NV[] => {
   const q = [start];
   const visited = new Set<Node<NV, EV>>();
   const traversal: NV[] = [];
@@ -23,57 +50,68 @@ export const breadthFirst = <NV, EV>(graph: Graph<NV, EV>, start: Node<NV, EV>):
     next = q.shift();
   }
   return traversal;
-}
+};
 
-export class Graph<NV, EV> {
-  nodes: Node<NV, EV>[] = [];
-
-  neighbors(node: Node<NV, EV>): Set<Node<NV, EV>> {
-    const neighborsWithDupes = node.edges.map((edge) => edge.nodes[1]);
-    const neighbors = new Set(neighborsWithDupes);
-    return neighbors;
-  }
-
-  addNode(value: NV): Node<NV, EV> {
-    const newNode: Node<NV, EV> = {
-      value: value,
-      edges: []
+export const depthFirst = <NV, EV>(
+  graph: Graph<NV, EV>,
+  start: Node<NV, EV>
+): NV[] => {
+  const q = [start];
+  const visited = new Set<Node<NV, EV>>();
+  const traversal: NV[] = [];
+  let next = q.pop();
+  while (next !== undefined) {
+    if (!visited.has(next)) {
+      visited.add(next);
+      traversal.push(next.value);
+      q.push(...graph.neighbors(next));
     }
-    this.nodes.push(newNode);
-    return newNode
+    next = q.pop();
   }
+  return traversal;
+};
+export const businessTrip = (
+  tripQueue: Node<string, number>[]
+): number | null => {
+  let cost = 0;
+  let current = tripQueue.shift()!;
 
-  addEdge(a: Node<NV, EV>, b: Node<NV, EV>, value: EV): void {
-    const newEdge: Edge<NV, EV> = {
-      value: value,
-      nodes: [a, b]
+  while (tripQueue.length > 0) {
+    let next = tripQueue.shift()!;
+
+    if (!current.edges.has(next)) {
+      return null;
     }
-    a.edges.push(newEdge)
-    b.edges.push(newEdge)
+
+    cost += current.edges.get(next)!;
+    current = next;
   }
+  return cost;
+};
 
-  addBiEdge(a: Node<NV, EV>, b: Node<NV, EV>, value: EV) {
-    const A2B: Edge<NV, EV> = {
-      value: value,
-      nodes: [a, b]
-    };
-    const B2A: Edge<NV, EV> = {
-      value: value,
-      nodes: [b, a]
-    };
-    a.edges.push(A2B);
-    b.edges.push(B2A);
+export const canSolve = (start: Node<string | undefined, boolean>): boolean => {
+  const visited = new Set();
+  const queue = [start];
+  let hasKey = false;
+
+  while (queue.length > 0) {
+    const node = queue.shift()!;
+    if (node.value === "treasure") {
+      return true;
+    }
+    if (node.value === "key") {
+      hasKey = true;
+    }
+    visited.add(node);
+
+    for (const [room, locked] of node.edges) {
+      if (!locked || (locked && hasKey)) {
+        if (visited.has(room) || queue.includes(room)) {
+          continue;
+        }
+        queue.push(room);
+      }
+    }
   }
-
-
-  getNodes(): Node<NV, EV>[] {
-    return this.nodes
-  }
-
-  size(): number {
-    console.log(this.nodes.length)
-    return this.nodes.length;
-  }
-
-  
-}
+  return false;
+};
