@@ -4,6 +4,11 @@
 ### Whiteboard
 ![](./MazeCC38.PNG)
 
+## Business Trip Calculation
+- Createa function which will calculate the total cost of a business trip itenerary, as well as determine if the trip is even possible with direct flights. 
+
+### Whiteboard ![](./businessTrip%20CC.PNG)
+
 
 ## Breadth First Traversal Of a Tree
 - The goal is to take a node as an arguement, and then return an array with all of the values of the nodes in the graph

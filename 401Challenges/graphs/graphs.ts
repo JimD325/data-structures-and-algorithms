@@ -75,7 +75,6 @@ export const businessTrip = (
 ): number | null => {
   let cost = 0;
   let current = tripQueue.shift()!;
-
   while (tripQueue.length > 0) {
     let next = tripQueue.shift()!;
 
